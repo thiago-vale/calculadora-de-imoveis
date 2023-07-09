@@ -5,6 +5,8 @@ from utils.clean import Clean
 extract = Scraping()
 clean = Clean()
 
+#extract
+
 bairro = ["Brooklin", "Saúde"]
 url = [
     "https://www.vivareal.com.br/venda/sp/sao-paulo/zona-sul/brooklin/apartamento_residencial/",
@@ -24,3 +26,9 @@ df.to_csv("./data/full_results.csv", index=False)  # Salva o DataFrame combinado
 extract.close()
 
 df = clean.cleancode(df)
+
+#tansform
+
+
+#laod
+df.to_csv('./data/raw/imoveis.csv')
