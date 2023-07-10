@@ -5,7 +5,20 @@ import numpy as np
 
 class Clean():
 
+    def __init__(self):
+        pass
+
     def iqr(self,df):
+        """
+        Calcula o intervalo interquartil (IQR) e identifica outliers em um DataFrame.
+
+        Parâmetros:
+            df (DataFrame): O DataFrame contendo os dados para análise.
+
+        Retorna:
+            tuple: Uma tupla contendo os limites inferior e superior do intervalo interquartil (lower_bound, upper_bound)
+            float: A porcentagem de outliers presentes nos dados.
+        """
         q1,q3 = df.quantile([.25 , .75])
         iqr= q3-q1
         lower_bound= q1 - 1.5*iqr
@@ -15,11 +28,31 @@ class Clean():
     
 
     def percentiles(self,df, percentiles_levels=0.1):
+        """
+        Calcula os percentis e identifica outliers em um DataFrame.
+
+        Parâmetros:
+            df (DataFrame): O DataFrame contendo os dados para análise.
+            percentiles_levels (float or list): Níveis dos percentis a serem calculados. Pode ser um valor único ou uma lista de valores.
+
+        Retorna:
+            tuple: Uma tupla contendo os limites inferior e superior dos percentis (lower_bound, upper_bound).
+            float: A porcentagem de outliers presentes nos dados.
+        """
         lower_bound, upper_bound = df.quantile([percentiles_levels, 1-percentiles_levels])
         pct_outliers = sum(~df.between(lower_bound, upper_bound))/len(df)
         return lower_bound, upper_bound, round(pct_outliers,2)
     
     def cleancode(self,df):
+        """
+        Realiza um processo de limpeza e transformação dos dados em um DataFrame.
+
+        Parâmetros:
+            df (DataFrame): O DataFrame contendo os dados a serem limpos e transformados.
+
+        Retorna:
+            DataFrame: O DataFrame resultante após o processo de limpeza e transformação dos dados.
+        """
         df = df.drop_duplicates(keep="first", subset=[coluna for coluna in df.columns if coluna!="crawled_at"]).reset_index(drop=True)
         filtro_de_anuncios = [str(_id).isnumeric() for _id in df["id"]]
         df = df[filtro_de_anuncios].reset_index(drop=True)
@@ -53,6 +86,17 @@ class Clean():
         return df
     
     def remove_outliers_bairro(self,df,coluna,percent_outliers):
+        """
+        Remove outliers em uma coluna específica para cada bairro presente no DataFrame.
+
+        Parâmetros:
+            df (pandas.DataFrame): O DataFrame contendo os dados.
+            coluna (str): O nome da coluna em que os outliers serão removidos.
+            percent_outliers (float): A porcentagem máxima permitida de outliers.
+
+        Retorna:
+            pandas.DataFrame: O DataFrame resultante após a remoção dos outliers.
+            """
         for bairro in df["crawler"].unique(): # Loop pelos bairros únicos presentes no DataFrame
             metodo = "iqr"  # Método inicialmente definido como "iqr"
             

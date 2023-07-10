@@ -18,6 +18,19 @@ class Scraping():
         pass
 
     def extract_apartment_data(self, bairro, url, pages):
+
+        """
+        Extrai dados de apartamentos de um determinado bairro em um site imobiliário.
+
+        Parâmetros:
+            bairro (str): O nome do bairro.
+            url (str): A URL inicial para a extração dos dados.
+            pages (int): O número de páginas a serem percorridas para extração dos dados.
+
+        Retorna:
+            list: Uma lista contendo dicionários com as informações dos apartamentos extraídos.
+
+        """
         driver = self.webdriver
         errors = []  # Lista para armazenar URLs que causaram erros durante a extração
         results = []  # Lista para armazenar os resultados extraídos dos apartamentos
