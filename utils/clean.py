@@ -23,7 +23,6 @@ class Clean():
         df = df.drop_duplicates(keep="first", subset=[coluna for coluna in df.columns if coluna!="crawled_at"]).reset_index(drop=True)
         filtro_de_anuncios = [str(_id).isnumeric() for _id in df["id"]]
         df = df[filtro_de_anuncios].reset_index(drop=True)
-        df["rooms"].str.split(" ").str[0].str.replace("--" , "0")
         df["Quarto"] = (df["rooms"].str.split(" ").str[0].str.replace("--","0").astype(int))
         df["Banheiro"] = (df["bathrooms"].str.split(" ").str[0].str.replace("--","0").astype(int))
         df["Garagem"] = (df["garages"].str.split(" ").str[0].str.replace("--","0").astype(int))

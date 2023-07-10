@@ -6,17 +6,11 @@ clean = Clean()
 
 # Extract
 
-df = pd.read_csv('./data/raw')
+df = pd.read_csv('./data/raw/imoveis.csv')
 
 # Transform
 
-clean.cleancode(df)
-
-coluna = "Preço"
-df = clean.remove_outliers_bairro(df,coluna,0.20)
-
-coluna = "condominio"
-df = clean.remove_outliers_bairro(df,coluna,0.20)
+df = clean.cleancode(df)
 
 # Load
 df.to_csv('./data/trusted/imoveis.csv')
