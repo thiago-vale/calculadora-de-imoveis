@@ -104,9 +104,8 @@ class Clean():
             lower_bound, upper_bound, pct_outliers = self.iqr(df.loc[df["crawler"]==bairro, coluna])
             print(f'{bairro},{pct_outliers}')  # Imprime o bairro e a porcentagem de outliers
             if pct_outliers > percent_outliers:  # Verifica se a porcentagem de outliers é maior que 10%
-                print('entrei no percntile')  # Imprime uma mensagem indicando que o método será alterado para "percentile"
                 metodo = "percentile"  # Método alterado para "percentile"
                 lower_bound, upper_bound, pct_outliers = self.percentiles(df.loc[df["crawler"]==bairro, coluna]) # Cálculo dos limites e porcentagem de outliers usando o método "percentile"
                 print(f"Coluna: {coluna}, bairro: {bairro}, metodo: {metodo}, pct_outliers: {pct_outliers}") # Impressão das informações sobre o método e porcentagem de outliers
                 df.loc[(df["crawler"]==bairro) & (~df[coluna].between(lower_bound, upper_bound)), coluna] = np.nan # Remoção dos outliers com base nos limites calculados pelo método "percentile"
-            return df
+        return df
