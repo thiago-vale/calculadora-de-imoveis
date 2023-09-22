@@ -7,11 +7,10 @@ clean = Clean()
 
 #extract
 
-bairro = ["Bela Vista","Liberdade","Brooklin", "Saúde","Ipiranga","Broklin"]
+bairro = ["Bela Vista","Liberdade","Saúde","Ipiranga","Broklin"]
 url = [
     "https://www.vivareal.com.br/venda/sp/sao-paulo/centro/bela-vista/apartamento_residencial/",
     "https://www.vivareal.com.br/venda/sp/sao-paulo/centro/liberdade/apartamento_residencial/",
-    "https://www.vivareal.com.br/venda/sp/sao-paulo/zona-sul/brooklin/apartamento_residencial/",
     "https://www.vivareal.com.br/venda/sp/sao-paulo/zona-sul/saude/apartamento_residencial/",
     "https://www.vivareal.com.br/venda/sp/sao-paulo/zona-sul/ipiranga/apartamento_residencial/",
     "https://www.vivareal.com.br/venda/sp/sao-paulo/zona-sul/brooklin/apartamento_residencial/"
